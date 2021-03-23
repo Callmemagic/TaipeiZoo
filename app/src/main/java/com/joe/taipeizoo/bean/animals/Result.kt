@@ -1,4 +1,4 @@
-package com.joe.taipeizoo.bean.Field
+package com.joe.taipeizoo.bean.animals
 
 data class Result(
     val limit: Int,

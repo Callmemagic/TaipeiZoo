@@ -15,6 +15,7 @@ import com.joe.taipeizoo.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var adapter: FieldListAdapter
     companion object {
         val TAG = HomeFragment :: class.java.simpleName
     }
@@ -29,12 +30,17 @@ class HomeFragment : Fragment() {
 
         homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        homeViewModel.fields.observe(viewLifecycleOwner, Observer {
-            binding.recycler.layoutManager = LinearLayoutManager(context)
-            binding.recycler.setHasFixedSize(true)
-            binding.recycler.adapter = FieldListAdapter(it.result.results)
+//        adapter = FieldListAdapter(homeViewModel)
+//        binding.recycler.adapter = adapter
+        binding.recycler.layoutManager = LinearLayoutManager(context)
+        binding.recycler.setHasFixedSize(true)
+
+        homeViewModel.results.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "notifyDataSetChanged!")
+            adapter = FieldListAdapter(homeViewModel)
+            binding.recycler.adapter = adapter
+            adapter.notifyDataSetChanged()
         })
 
         return binding.root

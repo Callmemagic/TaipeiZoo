@@ -1,54 +1,51 @@
 package com.joe.taipeizoo.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.joe.taipeizoo.R
-import com.joe.taipeizoo.bean.Field.ResultX
+import com.joe.taipeizoo.bean.field.ResultX
 import com.joe.taipeizoo.databinding.FieldItemBinding
-import com.joe.taipeizoo.ui.home.HomeFragment
+import com.joe.taipeizoo.ui.home.HomeViewModel
 
 /**
  * author: Joe Cheng
  */
-class FieldListAdapter(var fields: List<ResultX>) : RecyclerView.Adapter<FieldListViewHolder>(){
-    private lateinit var binding: FieldItemBinding
-    private lateinit var context: Context
+//class FieldListAdapter(var fields: List<ResultX>) : RecyclerView.Adapter<FieldListViewHolder>(){
+class FieldListAdapter(private val viewModel: HomeViewModel) :
+    RecyclerView.Adapter<FieldListViewHolder>(){
+    var fields : List<ResultX>? = viewModel.results.value
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FieldListViewHolder {
-        context = parent.context
-        binding = FieldItemBinding.inflate(LayoutInflater.from(context), parent, false)
-        return FieldListViewHolder(binding)
+        return FieldListViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: FieldListViewHolder, position: Int) {
-        holder.title.text = fields.get(position).E_Name
-        holder.content.text = fields.get(position).E_Info
-        holder.memo.text = fields.get(position).E_Memo
-        Glide.with(context)
-            .load(fields.get(position).E_Pic_URL)
-            .error(R.mipmap.ic_launcher)
-            .apply( RequestOptions().override(400, 400))
-            .centerCrop()
-            .into(holder.fieldImg)
-        holder.item.setOnClickListener {
-
-        }
+        val item = fields!![position]
+        holder.bind(viewModel, item)
     }
 
     override fun getItemCount(): Int {
-        return fields.size
+        return fields?.size ?: 0
     }
 }
 
-class FieldListViewHolder(@NonNull view: FieldItemBinding) : RecyclerView.ViewHolder(view.root)
+class FieldListViewHolder(private val binding: FieldItemBinding) : RecyclerView.ViewHolder(binding.root)
 {
-    var fieldImg = view.ivField
-    var title = view.tvTitle
-    var content = view.tvContent
-    var memo = view.tvMemo
-    var item = view.clItem
+    fun bind(viewModel: HomeViewModel, item: ResultX)
+    {
+        binding.viewModel = viewModel
+        binding.result = item
+        binding.executePendingBindings()
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): FieldListViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = FieldItemBinding.inflate(layoutInflater, parent, false)
+
+            return FieldListViewHolder(binding)
+        }
+    }
 }

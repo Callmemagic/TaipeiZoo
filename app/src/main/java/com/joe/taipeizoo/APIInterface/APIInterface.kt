@@ -1,6 +1,6 @@
 package com.joe.taipeizoo.APIInterface
 
-import com.joe.taipeizoo.bean.Field.Field
+import com.joe.taipeizoo.bean.field.Field
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 

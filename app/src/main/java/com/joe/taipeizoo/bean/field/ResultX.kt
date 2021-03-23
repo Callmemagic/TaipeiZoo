@@ -1,4 +1,4 @@
-package com.joe.taipeizoo.bean.Field
+package com.joe.taipeizoo.bean.field
 
 data class ResultX(
     val E_Pic_URL: String,
