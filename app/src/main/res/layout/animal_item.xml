@@ -3,10 +3,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.joe.taipeizoo.ui.home.HomeViewModel" />
+            type="com.joe.taipeizoo.ui.dashboard.SecondInfoViewModel" />
         <variable
             name="result"
-            type="com.joe.taipeizoo.bean.field.FieldDetailResult" />
+            type="com.joe.taipeizoo.bean.animals.AnimalDetailResult" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clItem"
@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars"
-            imageUrl="@{result.e_Pic_URL}"
+            imageUrl="@{result.a_Pic01_URL}"
             />
     
         <TextView
@@ -37,7 +37,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="@{result.e_Name}"
+            android:text="@{result.a_Name_Ch}"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivField"
@@ -50,7 +50,7 @@
             android:layout_marginTop="8dp"
             android:lines="2"
             android:ellipsize="marquee"
-            android:text="@{result.e_Info}"
+            android:text="@{result.a_Behavior}"
             app:layout_constraintStart_toStartOf="@+id/tvTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
     
@@ -59,7 +59,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{result.e_Memo}"
+            android:text="@{result.a_Location}"
             app:layout_constraintStart_toStartOf="@+id/tvTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvContent" />
     

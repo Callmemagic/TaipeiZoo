@@ -14,7 +14,7 @@ fun bindImage(imageView: ImageView, url: String) {
     Glide.with(imageView.context)
         .load(url)
         .error(R.mipmap.ic_launcher)
-        .apply( RequestOptions().override(400, 400))
+//        .apply( RequestOptions().override(400, 400))
         .centerCrop()
         .into(imageView)
 }

@@ -1,6 +1,10 @@
 package com.joe.taipeizoo.bean.field
 
-data class ResultX(
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class FieldDetailResult(
     val E_Pic_URL: String,
     val E_Geo: String,
     val E_Info: String,
@@ -10,4 +14,4 @@ data class ResultX(
     val E_Memo: String,
     val _id: Int,
     val E_URL: String
-)
+) : Parcelable

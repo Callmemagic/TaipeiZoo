@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joe.taipeizoo.APIInterface.RetrofitManager
-import com.joe.taipeizoo.bean.field.ResultX
+import com.joe.taipeizoo.bean.field.FieldDetailResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import com.joe.taipeizoo.bean.field.Field
 
 class HomeViewModel : ViewModel() {
-    val results = MutableLiveData<List<ResultX>>()
+    val results = MutableLiveData<List<FieldDetailResult>>()
+    val clickItem = MutableLiveData<FieldDetailResult>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -20,6 +20,10 @@ class HomeViewModel : ViewModel() {
             Log.d("IO層", "${response.result.count}")
             results.postValue(response.result.results)
         }
+    }
+
+    fun clickItem(item : FieldDetailResult) {
+        clickItem.postValue(item)
     }
 
 }

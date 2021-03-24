@@ -1,6 +1,8 @@
 package com.joe.taipeizoo.bean.animals
 
-data class ResultX(
+import com.google.gson.annotations.SerializedName
+
+data class AnimalDetailResult(
     val A_Behavior: String,
     val A_Distribution: String,
     val A_Voice03_URL: String,
@@ -13,7 +15,10 @@ data class ResultX(
     val A_Update: String,
     val A_Pic02_URL: String,
     val A_pdf01_ALT: String,
+
+    @SerializedName("\uFEFFA_Name_Ch")
     val A_Name_Ch: String,
+
     val A_Theme_Name: String,
     val A_pdf02_ALT: String,
     val A_Family: String,

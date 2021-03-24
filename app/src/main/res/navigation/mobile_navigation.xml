@@ -9,17 +9,36 @@
         android:id="@+id/navigation_home"
         android:name="com.joe.taipeizoo.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_to_second"
+            app:destination="@id/navigation_second_info"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.joe.taipeizoo.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_second_info"
+        android:name="com.joe.taipeizoo.ui.dashboard.SecondInfoFragment"
+        android:label="@string/title_second"
+        tools:layout="@layout/fragment_second_info" >
+        <argument
+            android:name="fieldInfo"
+            app:argType="com.joe.taipeizoo.bean.field.FieldDetailResult" />
+        <action
+            android:id="@+id/action_to_third"
+            app:destination="@id/navigation_third_info"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.joe.taipeizoo.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_third_info"
+        android:name="com.joe.taipeizoo.ui.notifications.ThirdInfoFragment"
+        android:label="@string/title_third"
+        tools:layout="@layout/fragment_third_info" />
 </navigation>

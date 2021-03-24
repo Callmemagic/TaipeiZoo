@@ -1,21 +1,18 @@
 package com.joe.taipeizoo.adapter
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.joe.taipeizoo.bean.field.ResultX
+import com.joe.taipeizoo.bean.field.FieldDetailResult
 import com.joe.taipeizoo.databinding.FieldItemBinding
 import com.joe.taipeizoo.ui.home.HomeViewModel
 
 /**
  * author: Joe Cheng
  */
-//class FieldListAdapter(var fields: List<ResultX>) : RecyclerView.Adapter<FieldListViewHolder>(){
 class FieldListAdapter(private val viewModel: HomeViewModel) :
     RecyclerView.Adapter<FieldListViewHolder>(){
-    var fields : List<ResultX>? = viewModel.results.value
+    var fields : List<FieldDetailResult>? = viewModel.results.value
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FieldListViewHolder {
         return FieldListViewHolder.from(parent)
@@ -33,7 +30,7 @@ class FieldListAdapter(private val viewModel: HomeViewModel) :
 
 class FieldListViewHolder(private val binding: FieldItemBinding) : RecyclerView.ViewHolder(binding.root)
 {
-    fun bind(viewModel: HomeViewModel, item: ResultX)
+    fun bind(viewModel: HomeViewModel, item: FieldDetailResult)
     {
         binding.viewModel = viewModel
         binding.result = item
