@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.joe.taipeizoo.ui.dashboard.SecondInfoViewModel" />
+            type="com.joe.taipeizoo.ui.field.FieldViewModel" />
         <variable
             name="result"
             type="com.joe.taipeizoo.bean.animals.AnimalDetailResult" />
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:onClick="@{(view) -> viewModel.clickItem(result)}">
+        android:onClick="@{() -> viewModel.clickItem(result)}">
     
         <ImageView
             android:id="@+id/ivField"

@@ -1,7 +1,10 @@
 package com.joe.taipeizoo.bean.animals
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class AnimalDetailResult(
     val A_Behavior: String,
     val A_Distribution: String,
@@ -53,4 +56,4 @@ data class AnimalDetailResult(
     val _id: Int,
     val A_Geo: String,
     val A_Crisis: String
-)
+) : Parcelable

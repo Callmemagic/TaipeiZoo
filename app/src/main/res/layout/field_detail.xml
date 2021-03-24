@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.joe.taipeizoo.ui.dashboard.SecondInfoViewModel" />
+            type="com.joe.taipeizoo.ui.field.FieldViewModel" />
         <variable
             name="fieldInfo"
             type="com.joe.taipeizoo.bean.field.FieldDetailResult" />
@@ -29,43 +29,34 @@
             android:id="@+id/tvContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{fieldInfo.e_Name}"
+            android:layout_marginEnd="24dp"
+            android:text="@{fieldInfo.e_Info}"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivField" />
 
         <TextView
-            android:id="@+id/tvMemo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@{fieldInfo.e_Info}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvContent" />
-
-        <TextView
             android:id="@+id/tvCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:text="@{fieldInfo.e_Category}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMemo" />
+            app:layout_constraintTop_toBottomOf="@+id/tvContent" />
 
         <TextView
             android:id="@+id/tvLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:text="在網頁開啟"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvContent"
             app:layout_constraintTop_toTopOf="@+id/tvCategory" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,4 +3,9 @@
     <string name="title_home">台北市立動物園</string>
     <string name="title_second">動物介紹</string>
     <string name="title_third">植物介紹</string>
+
+    <string name="behavior">行為：\n%1$s</string>
+    <string name="feature">特徵：\n%1$s</string>
+    <string name="interpretation">解說：\n%1$s</string>
+    <string name="habitat">棲息地：\n%1$s</string>
 </resources>

@@ -26,4 +26,9 @@ class HomeViewModel : ViewModel() {
         clickItem.postValue(item)
     }
 
+    fun clearClickItem()
+    {
+        clickItem.value = null
+    }
+
 }

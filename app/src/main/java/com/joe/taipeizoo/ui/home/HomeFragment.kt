@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.joe.taipeizoo.R
 import com.joe.taipeizoo.adapter.FieldListAdapter
 import com.joe.taipeizoo.databinding.FragmentHomeBinding
+import com.joe.taipeizoo.ui.field.FieldFragmentDirections
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -43,7 +44,11 @@ class HomeFragment : Fragment() {
         })
 
         homeViewModel.clickItem.observe(viewLifecycleOwner, Observer {
-            findNavController().navigate(HomeFragmentDirections.actionToSecond(it))
+            if (it != null)
+            {
+                findNavController().navigate(HomeFragmentDirections.actionToSecond(it))
+                homeViewModel.clearClickItem()
+            }
         })
 
         return binding.root

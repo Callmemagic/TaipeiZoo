@@ -1,21 +1,18 @@
 package com.joe.taipeizoo.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.joe.taipeizoo.bean.animals.AnimalDetailResult
 import com.joe.taipeizoo.bean.field.FieldDetailResult
 import com.joe.taipeizoo.databinding.AnimalItemBinding
 import com.joe.taipeizoo.databinding.FieldDetailBinding
-import com.joe.taipeizoo.databinding.FieldItemBinding
-import com.joe.taipeizoo.ui.dashboard.SecondInfoViewModel
-import com.joe.taipeizoo.ui.home.HomeViewModel
+import com.joe.taipeizoo.ui.field.FieldViewModel
 
 /**
  * author: Joe Cheng
  */
-class AnimalListAdapter(private val viewModel: SecondInfoViewModel) :
+class AnimalListAdapter(private val viewModel: FieldViewModel) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     var animals : List<AnimalDetailResult>? = viewModel.results.value
     var fieldInfo : FieldDetailResult? = viewModel.itemClicked.value
@@ -60,7 +57,7 @@ class AnimalListAdapter(private val viewModel: SecondInfoViewModel) :
 
 class AnimalListViewHolder(private val binding: AnimalItemBinding) : RecyclerView.ViewHolder(binding.root)
 {
-    fun bind(viewModel: SecondInfoViewModel, item: AnimalDetailResult)
+    fun bind(viewModel: FieldViewModel, item: AnimalDetailResult)
     {
         binding.viewModel = viewModel
         binding.result = item
@@ -79,7 +76,7 @@ class AnimalListViewHolder(private val binding: AnimalItemBinding) : RecyclerVie
 
 class FieldInfoViewHolder(private val binding : FieldDetailBinding) : RecyclerView.ViewHolder(binding.root)
 {
-    fun bind(viewModel : SecondInfoViewModel, item : FieldDetailResult)
+    fun bind(viewModel : FieldViewModel, item : FieldDetailResult)
     {
         binding.viewModel = viewModel
         binding.fieldInfo = item

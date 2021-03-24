@@ -21,9 +21,9 @@
 
     <fragment
         android:id="@+id/navigation_second_info"
-        android:name="com.joe.taipeizoo.ui.dashboard.SecondInfoFragment"
+        android:name="com.joe.taipeizoo.ui.field.FieldFragment"
         android:label="@string/title_second"
-        tools:layout="@layout/fragment_second_info" >
+        tools:layout="@layout/fragment_field_info" >
         <argument
             android:name="fieldInfo"
             app:argType="com.joe.taipeizoo.bean.field.FieldDetailResult" />
@@ -38,7 +38,11 @@
 
     <fragment
         android:id="@+id/navigation_third_info"
-        android:name="com.joe.taipeizoo.ui.notifications.ThirdInfoFragment"
+        android:name="com.joe.taipeizoo.ui.animal.AnimalFragment"
         android:label="@string/title_third"
-        tools:layout="@layout/fragment_third_info" />
+        tools:layout="@layout/fragment_animal_info" >
+        <argument
+            android:name="animalInfo"
+            app:argType="com.joe.taipeizoo.bean.animals.AnimalDetailResult" />
+    </fragment>
 </navigation>
