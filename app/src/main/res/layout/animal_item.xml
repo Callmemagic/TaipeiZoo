@@ -54,15 +54,6 @@
             app:layout_constraintStart_toStartOf="@+id/tvTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
     
-        <TextView
-            android:id="@+id/tvMemo"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{result.a_Location}"
-            app:layout_constraintStart_toStartOf="@+id/tvTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvContent" />
-    
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
