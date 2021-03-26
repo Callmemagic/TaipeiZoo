@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -27,6 +28,8 @@ class AnimalFragment : Fragment() {
 
         binding.viewModel = animalViewModel
         binding.animalInfo = args.animalInfo
+
+        (activity as AppCompatActivity).supportActionBar?.title = args.animalInfo.A_Name_Ch
 
         return binding.root
     }

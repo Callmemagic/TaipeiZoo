@@ -8,4 +8,7 @@
     <string name="feature">特徵：\n%1$s</string>
     <string name="interpretation">解說：\n%1$s</string>
     <string name="habitat">棲息地：\n%1$s</string>
+
+    <string name="open_in_browser"><u>在網頁開啟</u></string>
+    <string name="network_error">網路錯誤！</string>
 </resources>

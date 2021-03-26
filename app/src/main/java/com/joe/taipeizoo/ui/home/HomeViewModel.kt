@@ -10,15 +10,33 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
-    val results = MutableLiveData<List<FieldDetailResult>>()
+    val results = MutableLiveData<List<FieldDetailResult>?>()
     val clickItem = MutableLiveData<FieldDetailResult>()
+    val dataLoaded = MutableLiveData<Boolean>()
+    val isConnected = MutableLiveData<Boolean>()
 
     init {
+        dataLoaded.value = false
+    }
+
+    fun setNetworkConnected(connected : Boolean)
+    {
+        Log.d("Network", "setNetworkConnected: ${connected}")
+        isConnected.value = connected
+        if(connected)
+        {
+            getFieldList()
+        }
+    }
+
+    private fun getFieldList()
+    {
+        if(dataLoaded.value == true) return
         viewModelScope.launch(Dispatchers.IO) {
             val apiInterface = RetrofitManager.instance.apiInterface
             val response = apiInterface.fieldInfo.await()
-            Log.d("IO層", "${response.result.count}")
             results.postValue(response.result.results)
+            dataLoaded.postValue(true)
         }
     }
 
@@ -30,5 +48,4 @@ class HomeViewModel : ViewModel() {
     {
         clickItem.value = null
     }
-
 }

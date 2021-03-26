@@ -1,6 +1,6 @@
 package com.joe.taipeizoo.ui.field
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,31 +11,60 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FieldViewModel : ViewModel() {
-    val itemClicked = MutableLiveData<FieldDetailResult?>()
+    val fieldClicked = MutableLiveData<FieldDetailResult?>()
     val results = MutableLiveData<List<AnimalDetailResult>>()
-    val clickItem = MutableLiveData<AnimalDetailResult>()
+    val animalClicked = MutableLiveData<AnimalDetailResult>()
+    val dataLoaded = MutableLiveData<Boolean>()
+    val onClickOpenWeb = MutableLiveData<String>()
+    val isConnected = MutableLiveData<Boolean>()
+
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-//            val data = URL("https://data.taipei/api/v1/dataset/\n" +
-//                    "a3e2b221-75e0-45c1-8f97-75acbd43d613?scope=resourceAquire").readText()
-//            Log.d("文本", "${data}")
-            val apiInterface = RetrofitManager.instance.apiInterface
-            val response = apiInterface.animalInfo.await()
-            results.postValue(response.result.results)
+        dataLoaded.value = false
+    }
+
+    fun setNetworkConnected(connected : Boolean)
+    {
+        Log.d("Network", "setNetworkConnected: ${connected}")
+        isConnected.value = connected
+        if(connected)
+        {
+            getAnimalList()
         }
     }
 
-    fun setItem(item : FieldDetailResult) {
-        itemClicked.value = item
+    private fun getAnimalList()
+    {
+        if(dataLoaded.value == true) return
+        viewModelScope.launch(Dispatchers.IO) {
+            val apiInterface = RetrofitManager.instance.apiInterface
+            val response = apiInterface.animalInfo.await()
+            results.postValue(response.result.results)
+            dataLoaded.postValue(true)
+        }
     }
 
+    //上一頁帶進來的地點
+    fun setItem(item : FieldDetailResult) {
+        fieldClicked.value = item
+    }
+
+    //點擊到的動物
     fun clickItem(item : AnimalDetailResult) {
-        clickItem.postValue(item)
+        animalClicked.postValue(item)
     }
 
     fun clearClickItem()
     {
-        clickItem.value = null
+        animalClicked.value = null
     }
 
+    fun openWeb(url: String)
+    {
+        onClickOpenWeb.value = url
+    }
+
+    fun clearOpenWebUrl()
+    {
+        onClickOpenWeb.value = null
+    }
 }

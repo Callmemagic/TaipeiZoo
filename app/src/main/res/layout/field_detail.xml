@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="android.text.Html"/>
         <variable
             name="viewModel"
             type="com.joe.taipeizoo.ui.field.FieldViewModel" />
@@ -55,9 +56,11 @@
             android:id="@+id/tvLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="在網頁開啟"
             app:layout_constraintEnd_toEndOf="@+id/tvContent"
-            app:layout_constraintTop_toTopOf="@+id/tvCategory" />
+            app:layout_constraintTop_toTopOf="@+id/tvCategory"
+            android:autoLink="web"
+            android:text="@string/open_in_browser"
+            android:onClick="@{() -> viewModel.openWeb(fieldInfo.e_URL)}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -15,7 +15,7 @@ import com.joe.taipeizoo.ui.field.FieldViewModel
 class AnimalListAdapter(private val viewModel: FieldViewModel) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     var animals : List<AnimalDetailResult>? = viewModel.results.value
-    var fieldInfo : FieldDetailResult? = viewModel.itemClicked.value
+    var fieldInfo : FieldDetailResult? = viewModel.fieldClicked.value
 
     val TYPE_HEADER = 0
     val TYPE_NORMAL = 1
@@ -27,7 +27,7 @@ class AnimalListAdapter(private val viewModel: FieldViewModel) :
         }
         else if(viewType == TYPE_HEADER)
         {
-            return FieldInfoViewHolder.from(parent)
+            return FieldInfoViewHolder.from(parent, fieldInfo)
         }
         return AnimalListViewHolder.from(parent)
     }
@@ -46,9 +46,11 @@ class AnimalListAdapter(private val viewModel: FieldViewModel) :
         {
             val field = fieldInfo!!
             holder.bind(viewModel, field)
+
         }
     }
 
+    //判斷是header或是一般列表
     override fun getItemViewType(position: Int): Int {
         if (position == 0) return TYPE_HEADER
         else return TYPE_NORMAL
@@ -83,10 +85,9 @@ class FieldInfoViewHolder(private val binding : FieldDetailBinding) : RecyclerVi
     }
 
     companion object {
-        fun from(parent: ViewGroup): FieldInfoViewHolder {
+        fun from(parent: ViewGroup, fieldInfo : FieldDetailResult?): FieldInfoViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = FieldDetailBinding.inflate(layoutInflater, parent, false)
-
             return FieldInfoViewHolder(binding)
         }
     }
