@@ -10,7 +10,7 @@ import com.joe.taipeizoo.bean.field.FieldDetailResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FieldViewModel : ViewModel() {
+class FieldViewModel(private val fieldRepository: FieldRepository) : ViewModel() {
     val fieldClicked = MutableLiveData<FieldDetailResult?>()
     val results = MutableLiveData<List<AnimalDetailResult>>()
     val animalClicked = MutableLiveData<AnimalDetailResult>()
@@ -36,9 +36,7 @@ class FieldViewModel : ViewModel() {
     {
         if(dataLoaded.value == true) return
         viewModelScope.launch(Dispatchers.IO) {
-            val apiInterface = RetrofitManager.instance.apiInterface
-            val response = apiInterface.animalInfo.await()
-            results.postValue(response.result.results)
+            results.postValue(fieldRepository.loadDataFromAPI())
             dataLoaded.postValue(true)
         }
     }

@@ -4,12 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joe.taipeizoo.APIInterface.RetrofitManager
 import com.joe.taipeizoo.bean.field.FieldDetailResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val repository: IHomeRepository) : ViewModel() {
     val results = MutableLiveData<List<FieldDetailResult>?>()
     val clickItem = MutableLiveData<FieldDetailResult>()
     val dataLoaded = MutableLiveData<Boolean>()
@@ -33,10 +33,13 @@ class HomeViewModel : ViewModel() {
     {
         if(dataLoaded.value == true) return
         viewModelScope.launch(Dispatchers.IO) {
-            val apiInterface = RetrofitManager.instance.apiInterface
-            val response = apiInterface.fieldInfo.await()
-            results.postValue(response.result.results)
-            dataLoaded.postValue(true)
+            try {
+                results.postValue(repository.loadDataFromAPI())
+                dataLoaded.postValue(true)
+            } catch (e : Exception)
+            {
+                e.printStackTrace()
+            }
         }
     }
 

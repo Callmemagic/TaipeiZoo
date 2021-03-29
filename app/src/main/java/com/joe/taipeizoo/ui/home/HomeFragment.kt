@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,17 +17,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.joe.taipeizoo.R
 import com.joe.taipeizoo.adapter.FieldListAdapter
 import com.joe.taipeizoo.databinding.FragmentHomeBinding
-import com.joe.taipeizoo.ui.field.FieldFragmentDirections
-import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.android.ext.android.inject
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: FieldListAdapter
+    private lateinit var repository: HomeRepository
 
     companion object {
         val TAG = HomeFragment :: class.java.simpleName
     }
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by inject()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -37,14 +36,14 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        repository = HomeRepository()
+
+        binding.viewModel = homeViewModel
+        binding.lifecycleOwner = this
+
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
-
-        homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
-        binding.viewModel = homeViewModel
-        binding.lifecycleOwner = this
 
         homeViewModel.setNetworkConnected(isConnected)
 

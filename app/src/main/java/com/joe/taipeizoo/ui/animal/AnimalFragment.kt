@@ -28,6 +28,7 @@ class AnimalFragment : Fragment() {
 
         binding.viewModel = animalViewModel
         binding.animalInfo = args.animalInfo
+        binding.lifecycleOwner = this
 
         (activity as AppCompatActivity).supportActionBar?.title = args.animalInfo.A_Name_Ch
 

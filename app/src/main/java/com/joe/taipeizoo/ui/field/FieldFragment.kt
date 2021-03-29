@@ -12,17 +12,18 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.joe.taipeizoo.adapter.AnimalListAdapter
 import com.joe.taipeizoo.databinding.FragmentFieldInfoBinding
+import org.koin.android.ext.android.inject
 
 class FieldFragment : Fragment() {
     private lateinit var binding : FragmentFieldInfoBinding
-    private lateinit var fieldViewModel:  FieldViewModel
+    private val fieldViewModel:  FieldViewModel by inject()
     private lateinit var adapter : AnimalListAdapter
+    private lateinit var fieldRepository: FieldRepository
 
     private val args by navArgs<FieldFragmentArgs>()
 
@@ -33,13 +34,12 @@ class FieldFragment : Fragment() {
     ): View? {
         binding = FragmentFieldInfoBinding.inflate(inflater, container, false)
 
+        fieldRepository = FieldRepository()
+        binding.lifecycleOwner = this
+
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
-
-        fieldViewModel =
-                ViewModelProvider(this).get(FieldViewModel::class.java)
-        binding.lifecycleOwner = this
 
         fieldViewModel.setItem(args.fieldInfo)
         fieldViewModel.setNetworkConnected(isConnected)
