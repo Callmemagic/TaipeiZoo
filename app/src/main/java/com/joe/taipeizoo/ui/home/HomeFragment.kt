@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.joe.taipeizoo.R
 import com.joe.taipeizoo.adapter.FieldListAdapter
 import com.joe.taipeizoo.databinding.FragmentHomeBinding
-import org.koin.android.ext.android.inject
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -27,7 +26,7 @@ class HomeFragment : Fragment() {
     companion object {
         val TAG = HomeFragment :: class.java.simpleName
     }
-    private val homeViewModel: HomeViewModel by inject()
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -37,6 +36,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         repository = HomeRepository()
+        homeViewModel = ViewModelProvider(this, HomeViewModelFactory(repository)).get(HomeViewModel::class.java)
 
         binding.viewModel = homeViewModel
         binding.lifecycleOwner = this

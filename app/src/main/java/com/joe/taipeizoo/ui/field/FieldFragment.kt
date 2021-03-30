@@ -12,16 +12,16 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.joe.taipeizoo.adapter.AnimalListAdapter
 import com.joe.taipeizoo.databinding.FragmentFieldInfoBinding
-import org.koin.android.ext.android.inject
 
 class FieldFragment : Fragment() {
     private lateinit var binding : FragmentFieldInfoBinding
-    private val fieldViewModel:  FieldViewModel by inject()
+    private lateinit var fieldViewModel:  FieldViewModel
     private lateinit var adapter : AnimalListAdapter
     private lateinit var fieldRepository: FieldRepository
 
@@ -35,6 +35,8 @@ class FieldFragment : Fragment() {
         binding = FragmentFieldInfoBinding.inflate(inflater, container, false)
 
         fieldRepository = FieldRepository()
+        fieldViewModel =
+            ViewModelProvider(this, FieldViewModelFactory(fieldRepository)).get(FieldViewModel::class.java)
         binding.lifecycleOwner = this
 
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
